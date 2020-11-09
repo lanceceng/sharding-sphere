@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * @Author: Breet
- * @Date: 2019/7/10 11:39
+ * @Author: cat
+ * @Date: 2020/11/09 11:39
  * @Description: user dao层
  */
 @Mapper
@@ -19,4 +19,8 @@ public interface UserMapper extends BaseMapper<UserInfo> {
      * @return
      */
     List<UserInfo> queryList();
+
+    int saveInfo(UserInfo userInfo);
+
+    int deleteAllUsers();
 }

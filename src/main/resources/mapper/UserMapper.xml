@@ -6,14 +6,24 @@
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="age" jdbcType="INTEGER" property="age" />
     </resultMap>
+
     <sql id="Base_Column_List">
-    id, name, age
-  </sql>
+      id, name, age
+    </sql>
+
+    <insert id="saveInfo" parameterType="com.example.shardingSphere.entity.UserInfo">
+        INSERT INTO user  (  name, age )  VALUES  (  #{name}, #{age} )
+    </insert>
+
     <!-- 这里查逻辑表-->
-    <select id="queryList" resultMap="BaseResultMap">
+    <select id="queryList" resultMap="BaseResultMap" >
         select
           <include refid="Base_Column_List"/>
         from user
     </select>
+
+    <delete id="deleteAllUsers">
+        delete from user;
+    </delete>
 
 </mapper>

@@ -6,8 +6,8 @@ import com.example.shardingSphere.entity.UserInfo;
 import java.util.List;
 
 /**
- * @Author: Breet
- * @Date: 2019/7/10 11:40
+ * @Author: cat
+ * @Date: 2020/11/09 11:40
  * @Description:
  */
 public interface UserService extends IService<UserInfo> {
@@ -34,4 +34,5 @@ public interface UserService extends IService<UserInfo> {
 
     List<UserInfo> queryList();
 
+    int deleteAllUsers();
 }

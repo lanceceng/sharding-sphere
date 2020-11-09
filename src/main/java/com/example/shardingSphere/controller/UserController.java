@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * @Author: Breet
- * @Date: 2019/7/10 11:45
+ * @Author: cat
+ * @Date: 2020/11/09 11:45
  * @Description:
  */
 @RestController
@@ -28,10 +28,12 @@ public class UserController {
     public Boolean insert(UserInfo user) {
         return userService.save(user);
     }
+
     @GetMapping("getListCondition")
     public List<UserInfo> getListCondition(){
         return userService.getListCondition();
     }
+
     @GetMapping("getListCondition1")
     public List<UserInfo> getListCondition1(){
         return userService.getListCondition1();

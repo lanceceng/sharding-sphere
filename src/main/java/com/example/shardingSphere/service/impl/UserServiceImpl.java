@@ -1,26 +1,37 @@
 package com.example.shardingSphere.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.shardingSphere.dao.UserMapper;
+import com.example.shardingSphere.entity.DistInfo;
 import com.example.shardingSphere.entity.UserInfo;
+import com.example.shardingSphere.service.DistService;
 import com.example.shardingSphere.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * @Author: Breet
- * @Date: 2019/7/10 11:43
+ * @Author: cat
+ * @Date: 2020/11/09 11:43
  * @Description:
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, UserInfo> implements UserService {
+
+    @Autowired(required = false)
+    private DistService distService;
+
     @Override
     public boolean save(UserInfo entity) {
+        DistInfo distInfo = new DistInfo(entity.getId(), "key");
+        distService.save(distInfo);
         return super.save(entity);
+//        int count = baseMapper.saveInfo(entity);
+//        System.out.println(count);
+//        return true;
     }
     @Override
     public List<UserInfo> getUserList() {
@@ -53,5 +64,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserInfo> implement
     @Override
     public List<UserInfo> queryList() {
         return this.baseMapper.queryList();
+    }
+
+    @Override
+    public int deleteAllUsers(){
+        return this.baseMapper.deleteAllUsers();
     }
 }

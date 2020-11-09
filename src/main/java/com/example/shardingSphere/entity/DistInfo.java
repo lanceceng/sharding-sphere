@@ -12,8 +12,8 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-@TableName("user")
-public class UserInfo extends Model<UserInfo> {
+@TableName("dist")
+public class DistInfo extends Model<DistInfo> {
 
     /**
      * 主键Id
@@ -25,8 +25,4 @@ public class UserInfo extends Model<UserInfo> {
      */
     private String name;
 
-    /**
-     * 年龄
-     */
-    private int age;
 }
