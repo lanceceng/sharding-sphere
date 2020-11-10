@@ -29,6 +29,24 @@ public class UserController {
         return userService.save(user);
     }
 
+    /**
+     * update的逻辑是:分片的列必须在where条件里,并且必须同更新的值相同
+     * @param user
+     * @return
+     */
+    @GetMapping("/update")
+    public Boolean update(UserInfo user) {
+//        return userService.updateById(user);
+        int count = userService.updateUser(user);
+        System.out.println(count);
+        return count > 0 ? true : false;
+    }
+
+    @GetMapping("/delete")
+    public Boolean delete(Integer id) {
+        return userService.removeById(id);
+    }
+
     @GetMapping("getListCondition")
     public List<UserInfo> getListCondition(){
         return userService.getListCondition();

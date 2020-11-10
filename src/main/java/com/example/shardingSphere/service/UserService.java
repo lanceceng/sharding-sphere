@@ -35,4 +35,6 @@ public interface UserService extends IService<UserInfo> {
     List<UserInfo> queryList();
 
     int deleteAllUsers();
+
+    int updateUser(UserInfo user);
 }

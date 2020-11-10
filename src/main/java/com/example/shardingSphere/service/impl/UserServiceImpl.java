@@ -70,4 +70,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserInfo> implement
     public int deleteAllUsers(){
         return this.baseMapper.deleteAllUsers();
     }
+
+    @Override
+    public int updateUser(UserInfo user){
+        return this.baseMapper.updateUser(user);
+    }
 }

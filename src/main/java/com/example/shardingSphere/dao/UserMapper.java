@@ -23,4 +23,6 @@ public interface UserMapper extends BaseMapper<UserInfo> {
     int saveInfo(UserInfo userInfo);
 
     int deleteAllUsers();
+
+    int updateUser(UserInfo user);
 }

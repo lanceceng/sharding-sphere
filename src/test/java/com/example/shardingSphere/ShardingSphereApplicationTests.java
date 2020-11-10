@@ -32,25 +32,25 @@ public class ShardingSphereApplicationTests {
 	@Test
 	public void contextLoads() {
 		// 清空所有user表
-		userService.deleteAllUsers();
-//		List<Integer> ids = Arrays.asList(1, 2, 3, 4);
-//		userService.removeByIds(ids);
-		// 插入到数据库：ds1 ， 表：user_1
-		var user1 = new UserInfo(1, "小明", 19);
-		// 插入到数据库：ds0 ， 表：user_0
-		var user2 = new UserInfo(2, "张三", 20);
-		// 插入到数据库：ds1 ， 表：user_0
-		var user3 = new UserInfo(3, "李四", 22);
-		// 插入到数据库：ds0 ， 表：user_1
-		var user4 = new UserInfo(4, "小红", 17);
-		userService.save(user1);
-		userService.save(user2);
-		userService.save(user3);
-		userService.save(user4);
-
-		// 广播表，每个库都会插入
-		var dist = new DistInfo(new Random().nextInt(1000), "配置表");
-		distService.save(dist);
+//		userService.deleteAllUsers();
+////		List<Integer> ids = Arrays.asList(1, 2, 3, 4);
+////		userService.removeByIds(ids);
+//		// 插入到数据库：ds1 ， 表：user_1
+//		var user1 = new UserInfo(1, "小明", 19);
+//		// 插入到数据库：ds0 ， 表：user_0
+//		var user2 = new UserInfo(2, "张三", 20);
+//		// 插入到数据库：ds1 ， 表：user_0
+//		var user3 = new UserInfo(3, "李四", 22);
+//		// 插入到数据库：ds0 ， 表：user_1
+//		var user4 = new UserInfo(4, "小红", 17);
+//		userService.save(user1);
+//		userService.save(user2);
+//		userService.save(user3);
+//		userService.save(user4);
+//
+//		// 广播表，每个库都会插入
+//		var dist = new DistInfo(new Random().nextInt(1000), "配置表");
+//		distService.save(dist);
 	}
 
 }

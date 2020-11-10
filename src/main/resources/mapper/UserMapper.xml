@@ -12,8 +12,12 @@
     </sql>
 
     <insert id="saveInfo" parameterType="com.example.shardingSphere.entity.UserInfo">
-        INSERT INTO user  (  name, age )  VALUES  (  #{name}, #{age} )
+        insert into user  (  name, age )  values  (  #{name}, #{age} )
     </insert>
+
+    <update id="updateUser" parameterType="com.example.shardingSphere.entity.UserInfo">
+        update user set name=#{name} where id=#{id} and age=#{age}
+    </update>
 
     <!-- 这里查逻辑表-->
     <select id="queryList" resultMap="BaseResultMap" >
