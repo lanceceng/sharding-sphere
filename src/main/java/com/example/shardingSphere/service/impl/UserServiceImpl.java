@@ -8,8 +8,11 @@ import com.example.shardingSphere.entity.DistInfo;
 import com.example.shardingSphere.entity.UserInfo;
 import com.example.shardingSphere.service.DistService;
 import com.example.shardingSphere.service.UserService;
+import org.apache.shardingsphere.transaction.annotation.ShardingTransactionType;
+import org.apache.shardingsphere.transaction.core.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -24,6 +27,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserInfo> implement
     @Autowired(required = false)
     private DistService distService;
 
+    // 开启XA事务
+    @ShardingTransactionType(value = TransactionType.XA)
+    // 防止遇到RuntimeException的时候才会回滚
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean save(UserInfo entity) {
         DistInfo distInfo = new DistInfo(entity.getId(), "key");

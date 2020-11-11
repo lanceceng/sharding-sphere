@@ -68,6 +68,13 @@
 		</dependency>
 		<!--shardingsphere end-->
 
+		<!--XA分布式事务依赖-->
+		<dependency>
+			<groupId>org.apache.shardingsphere</groupId>
+			<artifactId>sharding-transaction-xa-core</artifactId>
+			<version>${sharding-sphere.version}</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
 		<dependency>
 			<groupId>com.alibaba</groupId>

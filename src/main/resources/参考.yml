@@ -1,0 +1,96 @@
+spring:
+  shardingsphere:
+    datasource:
+      names: ds0,ds0slave0,ds0slave1,ds1,ds1slave0,ds1slave1
+      ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassCame: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://192.168.203.132:3306/ds0
+        username: root
+        password: 123456
+      ds0slave0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassCame: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://192.168.203.132:3301/ds0
+        username: root
+        password: 123456
+      ds0slave1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassCame: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://192.168.203.132:3302/ds0
+        username: root
+        password: 123456
+      ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassCame: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://192.168.203.132:3306/ds1
+        username: root
+        password: 123456
+      ds1slave0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassCame: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://192.168.203.132:3301/ds1
+        username: root
+        password: 123456
+      ds1slave1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassCame: com.mysql.jdbc.Driver
+        jdbcUrl: jdbc:mysql://192.168.203.132:3302/ds1
+        username: root
+        password: 123456
+    sharding:
+      tables:
+        t_order:
+          actual-data-nodes: ms_ds$->{0..1}.t_order$->{0..1} #行表达式 ds1.t_order1,$->{}是为了区分spring 的${}
+          ## 指定分库规则
+          database-strategy:
+            inline:
+              sharding-column: user_id
+              algorithm-expression: ms_ds$->{user_id % 2}
+          ## 指定分表规则
+          table-strategy:
+            inline:
+              sharding-column: order_id
+              algorithm-expression: t_order$->{order_id % 2}
+
+        t_order_item:
+          actual-data-nodes: ms_ds$->{0..1}.t_order_item$->{0..1}
+          ## 通过hint方式自定义分库规则,这里需要根据userid路由，但order_item表没有该路由键，固自定义hint,然后绑定主表与子表，避免关联查询导致的全数据源路由
+          database-strategy:
+            hint:
+              algorithmClassName: com.construn.vehicle.user.core.HintSharding
+          ## 指定分表规则
+          table-strategy:
+            inline:
+              sharding-column: order_id
+              algorithm-expression: t_order_item$->{order_id % 2}
+          ## 雪花算法主键生成
+          key-generator:
+            column: item_id
+            type: SNOWFLAKE
+
+      ## 绑定主表与子表，避免关联查询导致的全数据源路由
+      binding-tables: t_order,t_order_item
+
+      ## 配置广播表：以广播的形式增删改所有库（如果只涉及查询的话可以不配置，轮询查询）
+      broadcast-tables: t_config
+
+
+      ## 读写分离
+      masterSlaveRules:
+        ms_ds0:
+          masterDataSourceName: ds0
+          slaveDataSourceNames:
+            - ds0slave0
+            - ds0slave1
+          loadBalanceAlgorithmType: ROUND_ROBIN
+        ms_ds1:
+          masterDataSourceName: ds1
+          slaveDataSourceNames:
+            - ds1slave0
+            - ds1slave1
+          loadBalanceAlgorithmType: ROUND_ROBIN
+    ## 打印sql，显示当前sql路由的数据库
+    props:
+      sql:
+        show: true
