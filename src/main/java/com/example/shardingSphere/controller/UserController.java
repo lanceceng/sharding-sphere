@@ -1,9 +1,11 @@
 package com.example.shardingSphere.controller;
 
-import com.example.shardingSphere.entity.UserInfo;
+import com.example.shardingSphere.entity.UserEntity;
 import com.example.shardingSphere.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -14,18 +16,19 @@ import java.util.List;
  * @Description:
  */
 @RestController
+@RequestMapping("/users/v1")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("getList")
-    public List<UserInfo> getList(){
+    @GetMapping("/list")
+    public List<UserEntity> getList(){
         return userService.getUserList();
     }
 
-    @GetMapping("/insert")
-    public Boolean insert(UserInfo user) {
+    @PostMapping("/insert")
+    public Boolean insert(UserEntity user) {
         return userService.save(user);
     }
 
@@ -34,36 +37,36 @@ public class UserController {
      * @param user
      * @return
      */
-    @GetMapping("/update")
-    public Boolean update(UserInfo user) {
+    @PostMapping("/update")
+    public Boolean update(UserEntity user) {
 //        return userService.updateById(user);
         int count = userService.updateUser(user);
         System.out.println(count);
         return count > 0 ? true : false;
     }
 
-    @GetMapping("/delete")
+    @PostMapping("/delete")
     public Boolean delete(Integer id) {
         return userService.removeById(id);
     }
 
     @GetMapping("getListCondition")
-    public List<UserInfo> getListCondition(){
+    public List<UserEntity> getListCondition(){
         return userService.getListCondition();
     }
 
     @GetMapping("getListCondition1")
-    public List<UserInfo> getListCondition1(){
+    public List<UserEntity> getListCondition1(){
         return userService.getListCondition1();
     }
 
     @GetMapping("getListCondition2")
-    public List<UserInfo> getListCondition2(){
+    public List<UserEntity> getListCondition2(){
         return userService.getListCondition2();
     }
 
     @GetMapping("queryList")
-    public List<UserInfo> queryList(){
+    public List<UserEntity> queryList(){
         return userService.queryList();
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.shardingSphere.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="com.example.shardingSphere.entity.UserInfo">
+    <resultMap id="BaseResultMap" type="com.example.shardingSphere.entity.UserEntity">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="age" jdbcType="INTEGER" property="age" />
@@ -11,11 +11,11 @@
       id, name, age
     </sql>
 
-    <insert id="saveInfo" parameterType="com.example.shardingSphere.entity.UserInfo">
+    <insert id="saveInfo" parameterType="com.example.shardingSphere.entity.UserEntity">
         insert into user  (  name, age )  values  (  #{name}, #{age} )
     </insert>
 
-    <update id="updateUser" parameterType="com.example.shardingSphere.entity.UserInfo">
+    <update id="updateUser" parameterType="com.example.shardingSphere.entity.UserEntity">
         update user set name=#{name} where id=#{id} and age=#{age}
     </update>
 

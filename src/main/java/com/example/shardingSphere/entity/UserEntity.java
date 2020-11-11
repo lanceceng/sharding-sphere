@@ -13,12 +13,12 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @TableName("user")
-public class UserInfo extends Model<UserInfo> {
+public class UserEntity extends Model<UserEntity> {
 
     /**
      * 主键Id
      */
-    private int id;
+    private Integer id;
 
     /**
      * 名称

@@ -1,7 +1,7 @@
 package com.example.shardingSphere.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.shardingSphere.entity.DistInfo;
+import com.example.shardingSphere.entity.DistEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Description: user dao层
  */
 @Mapper
-public interface DistMapper extends BaseMapper<DistInfo> {
+public interface DistMapper extends BaseMapper<DistEntity> {
 
 
 }

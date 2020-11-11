@@ -13,12 +13,12 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @TableName("dist")
-public class DistInfo extends Model<DistInfo> {
+public class DistEntity extends Model<DistEntity> {
 
     /**
      * 主键Id
      */
-    private int id;
+    private Integer id;
 
     /**
      * 名称

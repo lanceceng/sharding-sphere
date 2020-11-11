@@ -1,7 +1,7 @@
 package com.example.shardingSphere.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.shardingSphere.entity.UserInfo;
+import com.example.shardingSphere.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,17 +12,17 @@ import java.util.List;
  * @Description: user dao层
  */
 @Mapper
-public interface UserMapper extends BaseMapper<UserInfo> {
+public interface UserMapper extends BaseMapper<UserEntity> {
 
     /**
      * 定义SQL查询
      * @return
      */
-    List<UserInfo> queryList();
+    List<UserEntity> queryList();
 
-    int saveInfo(UserInfo userInfo);
+    int saveInfo(UserEntity userInfo);
 
     int deleteAllUsers();
 
-    int updateUser(UserInfo user);
+    int updateUser(UserEntity user);
 }

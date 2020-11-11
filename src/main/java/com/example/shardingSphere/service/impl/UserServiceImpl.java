@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.shardingSphere.dao.UserMapper;
-import com.example.shardingSphere.entity.DistInfo;
-import com.example.shardingSphere.entity.UserInfo;
+import com.example.shardingSphere.entity.DistEntity;
+import com.example.shardingSphere.entity.UserEntity;
 import com.example.shardingSphere.service.DistService;
 import com.example.shardingSphere.service.UserService;
 import org.apache.shardingsphere.transaction.annotation.ShardingTransactionType;
@@ -22,7 +22,7 @@ import java.util.List;
  * @Description:
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, UserInfo> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
 
     @Autowired(required = false)
     private DistService distService;
@@ -32,8 +32,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserInfo> implement
     // 防止遇到RuntimeException的时候才会回滚
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean save(UserInfo entity) {
-        DistInfo distInfo = new DistInfo(entity.getId(), "key");
+    public boolean save(UserEntity entity) {
+        DistEntity distInfo = new DistEntity(entity.getId(), "key");
         distService.save(distInfo);
         return super.save(entity);
 //        int count = baseMapper.saveInfo(entity);
@@ -41,35 +41,35 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserInfo> implement
 //        return true;
     }
     @Override
-    public List<UserInfo> getUserList() {
-        return this.baseMapper.selectList(Wrappers.<UserInfo>lambdaQuery());
+    public List<UserEntity> getUserList() {
+        return this.baseMapper.selectList(Wrappers.<UserEntity>lambdaQuery());
     }
 
     @Override
-    public List<UserInfo> getListCondition() {
-        LambdaQueryWrapper<UserInfo> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.ge(UserInfo::getAge,"5");
+    public List<UserEntity> getListCondition() {
+        LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.ge(UserEntity::getAge,"5");
         return this.baseMapper.selectList(queryWrapper);
     }
     @Override
-    public List<UserInfo> getListCondition1() {
+    public List<UserEntity> getListCondition1() {
         /***
          *  ***尚未清楚为什么 between and 语句不行
          */
-        LambdaQueryWrapper<UserInfo> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.between(UserInfo::getAge,3,9);
+        LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.between(UserEntity::getAge,3,9);
         return this.baseMapper.selectList(queryWrapper);
     }
     @Override
-    public List<UserInfo> getListCondition2() {
-        LambdaQueryWrapper<UserInfo> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.ge(UserInfo::getAge,3);
-        queryWrapper.le(UserInfo::getAge,15);
+    public List<UserEntity> getListCondition2() {
+        LambdaQueryWrapper<UserEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.ge(UserEntity::getAge,3);
+        queryWrapper.le(UserEntity::getAge,15);
         return this.baseMapper.selectList(queryWrapper);
     }
 
     @Override
-    public List<UserInfo> queryList() {
+    public List<UserEntity> queryList() {
         return this.baseMapper.queryList();
     }
 
@@ -79,7 +79,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserInfo> implement
     }
 
     @Override
-    public int updateUser(UserInfo user){
+    public int updateUser(UserEntity user){
         return this.baseMapper.updateUser(user);
     }
 }
