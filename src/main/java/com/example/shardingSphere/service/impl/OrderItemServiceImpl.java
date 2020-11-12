@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItemEntity> implements OrderItemService {
 
     @Override
-    public boolean saveOrderItem(OrderItemEntity orderItem, Integer userId) {
+    public boolean saveOrderItem(OrderItemEntity orderItem, Long userId) {
         try (HintManager hintManager = HintManager.getInstance()) {
             hintManager.addDatabaseShardingValue("t_order_item", userId);
             return this.save(orderItem);

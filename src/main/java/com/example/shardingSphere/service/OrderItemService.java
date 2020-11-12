@@ -13,6 +13,6 @@ import com.example.shardingSphere.entity.OrderItemEntity;
  */
 public interface OrderItemService extends IService<OrderItemEntity> {
 
-    boolean saveOrderItem(OrderItemEntity orderItem, Integer userId);
+    boolean saveOrderItem(OrderItemEntity orderItem, Long userId);
 
 }

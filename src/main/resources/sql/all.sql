@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80018
 File Encoding         : 65001
 
-Date: 2020-11-12 01:16:34
+Date: 2020-11-12 21:29:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,10 +20,10 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `dist`;
 CREATE TABLE `dist` (
-                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                      `id` bigint(11) NOT NULL AUTO_INCREMENT,
                       `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
                       PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=803 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1326879635804078082 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for t_order_0
@@ -95,7 +95,7 @@ CREATE TABLE `user_0` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_1`;
 CREATE TABLE `user_1` (
-                        `id` int(11) NOT NULL AUTO_INCREMENT,
+                        `id` bigint(11) NOT NULL AUTO_INCREMENT,
                         `name` varchar(10) DEFAULT NULL,
                         `age` int(11) DEFAULT NULL,
                         PRIMARY KEY (`id`)

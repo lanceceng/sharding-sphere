@@ -18,7 +18,7 @@ public class DistEntity extends Model<DistEntity> {
     /**
      * 主键Id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 名称

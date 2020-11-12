@@ -10,12 +10,12 @@ import java.util.Collection;
  * 分片键值管理器
  * 自定义hint,然后绑定主表与子表
  */
-public class HintSharding implements HintShardingAlgorithm<Integer> {
+public class HintSharding implements HintShardingAlgorithm<Long> {
     @Override
-    public Collection<String> doSharding(Collection<String> availableTargetNames, HintShardingValue<Integer> hintShardingValue) {
+    public Collection<String> doSharding(Collection<String> availableTargetNames, HintShardingValue<Long> hintShardingValue) {
         Collection<String> result = new ArrayList<>();
         for (String each : availableTargetNames) {
-            for (Integer value : hintShardingValue.getValues()) {
+            for (Long value : hintShardingValue.getValues()) {
                 if (each.endsWith(String.valueOf(value % 2))) {
                     result.add(each);
                 }

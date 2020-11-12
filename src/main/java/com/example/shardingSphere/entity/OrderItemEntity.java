@@ -1,5 +1,7 @@
 package com.example.shardingSphere.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,9 +26,10 @@ public class OrderItemEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer orderId;
+    private Long orderId;
 
-    private Integer productId;
+    @TableId(value = "user_id",type = IdType.AUTO)
+    private Long productId;
 
     private String productName;
 
@@ -34,7 +37,7 @@ public class OrderItemEntity implements Serializable {
 
     private BigDecimal discount;
 
-    private Integer count;
+    private Long count;
 
 
 }

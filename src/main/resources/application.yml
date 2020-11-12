@@ -63,6 +63,9 @@ spring:
             inline:
               sharding-column: order_id
               algorithm-expression: t_order_${order_id % 2}
+          keyGenerator:
+            type: SNOWFLAKE
+            column: order_id
         t_order_item:
           actual-data-nodes: ds${0..1}.t_order_item_${0..1}
           ## 通过hint方式自定义分库规则,这里需要根据user_id路由，但order_item表没有user_id，固自定义hint,然后绑定主表与子表，避免关联查询导致的全数据源路由

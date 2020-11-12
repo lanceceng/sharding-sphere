@@ -1,11 +1,13 @@
 package com.example.shardingSphere;
 
+import com.example.shardingSphere.entity.DistEntity;
 import com.example.shardingSphere.entity.OrderEntity;
 import com.example.shardingSphere.entity.OrderItemEntity;
 import com.example.shardingSphere.service.DistService;
 import com.example.shardingSphere.service.OrderItemService;
 import com.example.shardingSphere.service.OrderService;
 import com.example.shardingSphere.service.UserService;
+import lombok.var;
 import org.apache.shardingsphere.api.hint.HintManager;
 import org.apache.shardingsphere.transaction.annotation.ShardingTransactionType;
 import org.apache.shardingsphere.transaction.core.TransactionType;
@@ -22,6 +24,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 测试类
@@ -74,8 +77,16 @@ public class ShardingSphereApplicationTests {
 //		distService.save(dist);
     }
 
+    @Test
+    public void saveCommon(){
+        // 广播表，每个库都会插入
+		var dist = new DistEntity(null, "配置表");
+		distService.save(dist);
+    }
+
+
     /**
-     * 与分片子表关联
+     * 与分片子表关联（使用自增ID）
      *
      * @param
      * @return void
@@ -86,10 +97,10 @@ public class ShardingSphereApplicationTests {
     @ShardingTransactionType(value = TransactionType.XA)
     @Transactional(rollbackFor = Exception.class)
 //    @Rollback(value = false)
-    public void testSaveOrder() {
+    public void testSaveOrder0() {
         for (int i = 0; i < 10; i++) {
-            Integer orderId = 1000 + i;
-            Integer userId = 10 + i;
+            long orderId = 1000 + i;
+            long userId = 10 + i;
 
             OrderEntity o = new OrderEntity();
             o.setOrderId(orderId);
@@ -103,12 +114,54 @@ public class ShardingSphereApplicationTests {
 //            if (orderId > 1005) {
 //                int a = 1 / 0;
 //            }
-            Integer productId = 2000 + i;
+            long productId = 2000 + i;
             OrderItemEntity oi = new OrderItemEntity();
             oi.setProductId(productId);
             oi.setProductName("产品" + productId);
             oi.setOrderId(orderId);
             orderItemService.saveOrderItem(oi, userId);
+        }
+    }
+
+    /**
+     * 与分片子表关联（使用雪花ID）
+     *
+     * @param
+     * @return void
+     * @author cat
+     * @date 2020-11-11 11:10
+     */
+    @Test
+    @ShardingTransactionType(value = TransactionType.XA)
+//    @Transactional(rollbackFor = Exception.class)
+    @Rollback(value = false)
+    public void testSaveOrder() {
+        for (int i = 0; i < 10; i++) {
+//            long orderId = 1000 + i;
+            long userId = 10 + i;
+
+            OrderEntity o = new OrderEntity();
+//            o.setOrderId(orderId);
+//            o.setUserId(userId);
+            o.setOrderId(null);
+            o.setUserId(userId);
+            o.setAmount(new BigDecimal(100));
+            o.setDiscount(new BigDecimal(100));
+            o.setCreateTime(new Date());
+            orderService.save(o);
+            System.out.println(o);
+
+            // XA事务验证
+//            if (orderId > 1005) {
+//                int a = 1 / 0;
+//            }
+            long productId = 2000 + i;
+            OrderItemEntity oi = new OrderItemEntity();
+            oi.setProductId(null);
+            oi.setProductName("产品" + productId);
+            oi.setOrderId(o.getOrderId());
+            orderItemService.saveOrderItem(oi, userId);
+            System.out.println(oi);
         }
     }
 

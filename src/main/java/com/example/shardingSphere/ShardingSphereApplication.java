@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @ComponentScan(basePackages = {"com.example.shardingSphere.*"})
 @SpringBootApplication(exclude = JtaAutoConfiguration.class)
-@EnableTransactionManagement
+@EnableTransactionManagement // 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
 public class ShardingSphereApplication {
 
 	public static void main(String[] args) {

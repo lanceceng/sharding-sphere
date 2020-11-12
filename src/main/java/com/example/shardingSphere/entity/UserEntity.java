@@ -18,7 +18,7 @@ public class UserEntity extends Model<UserEntity> {
     /**
      * 主键Id
      */
-    private Integer id;
+    private Long id;
 
     /**
      * 名称
