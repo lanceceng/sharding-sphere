@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -84,6 +85,7 @@ public class ShardingSphereApplicationTests {
     @Test
     @ShardingTransactionType(value = TransactionType.XA)
     @Transactional(rollbackFor = Exception.class)
+//    @Rollback(value = false)
     public void testSaveOrder() {
         for (int i = 0; i < 10; i++) {
             Integer orderId = 1000 + i;
@@ -97,7 +99,7 @@ public class ShardingSphereApplicationTests {
             o.setCreateTime(new Date());
             orderService.save(o);
 
-            // XA事务验证失败，后续跟进
+            // XA事务验证
 //            if (orderId > 1005) {
 //                int a = 1 / 0;
 //            }

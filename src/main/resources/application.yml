@@ -104,11 +104,11 @@ spring:
 
       # 默认数据源
       defaultDataSourceName: ds0
-#      defaultTableStrategy:
-#        none:
-#      defaultKeyGenerator:
-#        type: SNOWFLAKE
-#        column: id
+      defaultTableStrategy:
+        none:
+      defaultKeyGenerator:
+        type: SNOWFLAKE
+        column: id
 
 #mybatis-plus映射mapper文件
 mybatis-plus:

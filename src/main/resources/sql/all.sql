@@ -88,7 +88,7 @@ CREATE TABLE `user_0` (
                         `name` varchar(10) DEFAULT NULL,
                         `age` int(11) DEFAULT NULL,
                         PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for user_1
@@ -99,4 +99,4 @@ CREATE TABLE `user_1` (
                         `name` varchar(10) DEFAULT NULL,
                         `age` int(11) DEFAULT NULL,
                         PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;

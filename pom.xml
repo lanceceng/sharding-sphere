@@ -90,6 +90,11 @@
 			<artifactId>sharding-transaction-xa-core</artifactId>
 			<version>${sharding-sphere.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.shardingsphere</groupId>
+			<artifactId>sharding-transaction-spring</artifactId>
+			<version>${sharding-sphere.version}</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
 		<dependency>
