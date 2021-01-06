@@ -2,6 +2,7 @@ package com.example.shardingSphere.controller;
 
 import com.example.shardingSphere.entity.UserEntity;
 import com.example.shardingSphere.service.UserService;
+import org.apache.shardingsphere.api.hint.HintManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,12 @@ public class UserController {
 
     @GetMapping("/list")
     public List<UserEntity> getList(){
-        return userService.getUserList();
+        HintManager hintManager = HintManager.getInstance();
+        //清除分片键值，分片键值保存在ThreadLocal中，所以需要在操作结束时调用hintManager.close()来清除ThreadLocal中的内容。hintManager实现了AutoCloseable接口，可推荐使用try with resource自动关闭。
+        hintManager.setMasterRouteOnly();
+        List<UserEntity> list = userService.getUserList();
+        hintManager.close();
+        return list;
     }
 
     @PostMapping("/insert")
