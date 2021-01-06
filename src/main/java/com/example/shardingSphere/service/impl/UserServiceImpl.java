@@ -33,8 +33,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean save(UserEntity entity) {
-        DistEntity distInfo = new DistEntity(entity.getId(), "key");
-        distService.save(distInfo);
+//        DistEntity distInfo = new DistEntity(entity.getId(), "key");
+//        distService.save(distInfo);
         return super.save(entity);
 //        int count = baseMapper.saveInfo(entity);
 //        System.out.println(count);

@@ -86,7 +86,7 @@ public class ShardingSphereApplicationTests {
 
 
     /**
-     * 与分片子表关联（使用自增ID）
+     * 与分片子表关联（使用自增ID） 这段代码可以拿到impl层测试
      *
      * @param
      * @return void
@@ -111,9 +111,9 @@ public class ShardingSphereApplicationTests {
             orderService.save(o);
 
             // XA事务验证
-//            if (orderId > 1005) {
-//                int a = 1 / 0;
-//            }
+            if (orderId > 1005) {
+                int a = 1 / 0;
+            }
             long productId = 2000 + i;
             OrderItemEntity oi = new OrderItemEntity();
             oi.setProductId(productId);

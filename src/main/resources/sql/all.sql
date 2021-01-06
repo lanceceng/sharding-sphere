@@ -84,7 +84,7 @@ CREATE TABLE `t_order_item_1` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_0`;
 CREATE TABLE `user_0` (
-                        `id` int(11) NOT NULL AUTO_INCREMENT,
+                        `id` bigint(11) NOT NULL AUTO_INCREMENT,
                         `name` varchar(10) DEFAULT NULL,
                         `age` int(11) DEFAULT NULL,
                         PRIMARY KEY (`id`)
