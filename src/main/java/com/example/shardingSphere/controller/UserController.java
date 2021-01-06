@@ -22,11 +22,12 @@ public class UserController {
 
     @GetMapping("/list")
     public List<UserEntity> getList(){
-        HintManager hintManager = HintManager.getInstance();
-        //清除分片键值，分片键值保存在ThreadLocal中，所以需要在操作结束时调用hintManager.close()来清除ThreadLocal中的内容。hintManager实现了AutoCloseable接口，可推荐使用try with resource自动关闭。
-        hintManager.setMasterRouteOnly();
-        List<UserEntity> list = userService.getUserList();
-        hintManager.close();
+        List<UserEntity> list = null;
+        try(HintManager hintManager = HintManager.getInstance()) {
+            //清除分片键值，分片键值保存在ThreadLocal中，所以需要在操作结束时调用hintManager.close()来清除ThreadLocal中的内容。hintManager实现了AutoCloseable接口，可推荐使用try with resource自动关闭。
+            hintManager.setMasterRouteOnly();
+            list = userService.getUserList();
+        }
         return list;
     }
 
